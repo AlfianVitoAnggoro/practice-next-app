@@ -1,27 +1,40 @@
-import { getData } from '@/services/products';
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
+import useSWR from 'swr';
+// import { getData } from '@/services/products';
 
 type ProductPageProps = {
   params: {
     slug: string[];
   };
 };
+const fetcher = (url: string) => fetch(url).then(res => res.json());
 
-export default async function DetailProduct(props: ProductPageProps) {
+export default function ProductPage(props: ProductPageProps) {
   const { params } = props;
-  const products = await getData('http://localhost:3000/api/product');
+  const { data } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/product`,
+    fetcher,
+  );
+  // const products = await getData(
+  //   `${process.env.NEXT_PUBLIC_API_URL}/api/product`,
+  // );
+
+  const products = {
+    data: data?.data,
+  };
   return (
     <div>
       <h1 className="text-3xl text-white text-center">
         {params.slug ? 'Detail Product Pages' : 'Product Pages'}
       </h1>
       <div className="grid grid-cols-4 gap-4 p-4">
-        {products.data.length > 0 &&
-          products.data.map((product: any) => {
+        {products.data?.length > 0 &&
+          products.data?.map((product: any) => {
             return (
               <Link
-                href={`http://localhost:3000/product/detail/${product.id}`}
+                href={`${process.env.NEXT_PUBLIC_API_URL}/product/detail/${product.id}`}
                 key={product.id}
                 className="w-11/12 bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 "
               >

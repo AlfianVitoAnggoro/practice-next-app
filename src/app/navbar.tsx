@@ -54,6 +54,7 @@ export default function Navbar() {
               height={25}
               alt="profile"
               className="w-6 h-6 rounded-full mr-3"
+              priority
             />
             <h4 className="text-white mr-3">{session?.user?.fullname}</h4>
             <button

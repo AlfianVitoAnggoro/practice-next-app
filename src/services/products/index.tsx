@@ -3,11 +3,11 @@ export const getData = async (url: string) => {
   //   cache: 'no-store',
   // });
   const res = await fetch(url, {
-    cache: 'force-cache',
-    next: {
-      // tags: ['products'],
-      revalidate: 5,
-    },
+    cache: 'no-store',
+    // next: {
+    //   // tags: ['products'],
+    //   revalidate: 5,
+    // },
   });
   if (!res.ok) {
     throw new Error('Failed to fetch data');

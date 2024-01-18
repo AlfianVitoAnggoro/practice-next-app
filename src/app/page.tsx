@@ -1,16 +1,21 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+  ),
   title: 'Home',
   description: 'Next JS Pradtice',
-  authors: [{ name: 'Alfian Vito Anggoro', url: 'http://localhost:3000/' }],
+  authors: [
+    { name: 'Alfian Vito Anggoro', url: `${process.env.NEXT_PUBLIC_API_URL}` },
+  ],
   icons: {
     icon: '/images/icon.png',
   },
   openGraph: {
     title: 'Home',
     description: 'Next JS Pradtice',
-    url: 'http://localhost:3000/',
+    url: `${process.env.NEXT_PUBLIC_API_URL}`,
     siteName: 'Home',
   },
 };

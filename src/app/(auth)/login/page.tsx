@@ -30,7 +30,7 @@ export default function Login({ searchParams }: any) {
         setIsLoading(false);
       }
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
   return (
